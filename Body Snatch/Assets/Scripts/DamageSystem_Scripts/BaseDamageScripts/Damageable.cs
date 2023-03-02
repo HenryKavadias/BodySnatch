@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+// Warning, if this object has and post death processes, DON'T use destroythis script
+//  on the object until those process is finished.
+// (possibly use destory by time, or just deactivate the game object)
 public class Damageable : MonoBehaviour
 {
     [SerializeField] protected Progressive _health;

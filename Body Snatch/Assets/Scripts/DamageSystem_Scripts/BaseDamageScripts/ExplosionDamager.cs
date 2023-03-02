@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Warning, if you are going to use this script, DON'T use destroythis script on the
+// object until the explosion process is finished.
+// (possibly use destory by time, or just deactivate the game object)
 public class ExplosionDamager : Damager
 {
     public float radius = 3;

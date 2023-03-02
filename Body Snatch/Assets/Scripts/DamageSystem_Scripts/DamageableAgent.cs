@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public class DamageableAgent : Damageable
 {
-    // Todo: give damageable a references to the objects "Health" script and use that to manage its health value
-
+    
     protected GameObject lastAttacker = null;
 
     public override void Damage(float damage, GameObject attacker = null)
