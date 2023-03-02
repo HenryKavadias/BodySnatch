@@ -18,11 +18,11 @@ public class Damageable : MonoBehaviour
     public virtual void Damage(
         float damage, GameObject attacker = null)
     {
-        
-        //if (_health.Current <= 0)
-        //{
-        //    return;
-        //}
+        // prevents overlapping hit ties
+        if (_health.Current <= 0)
+        {
+            return;
+        }
 
         _health.Sub(damage);
 

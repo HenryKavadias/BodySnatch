@@ -10,6 +10,12 @@ public class DamageableAgent : Damageable
 
     public override void Damage(float damage, GameObject attacker = null)
     {
+        // prevents overlapping hit ties
+        if (_health.Current <= 0)
+        {
+            return;
+        }
+
         _health.Sub(damage);
 
         //Debug.Log(gameObject.tag + " has taken " + damage + " damage. Remaining health is " + _health.Current);
