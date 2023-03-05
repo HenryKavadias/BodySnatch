@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b970c69cf642c5d41a3f52d52a7d7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  possessable: 1
   moveSpeed: 4
   indicator: {fileID: 788705029296381552}
   attacks:

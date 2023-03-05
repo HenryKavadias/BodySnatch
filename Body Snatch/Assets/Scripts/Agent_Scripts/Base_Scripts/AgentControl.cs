@@ -20,8 +20,11 @@ public struct Attack
 // child/parent object. More testing required in that regard)
 public class AgentControl : MonoBehaviour
 {
+    // Determines if an agent can be possessed or not (should set when spawned)
+    public bool possessable = false;
+    
     public float moveSpeed;
-    //public float health;
+
     // Visual indicator that shows who is in control of the agent (AI or Player)
     public GameObject indicator;
 
@@ -32,12 +35,16 @@ public class AgentControl : MonoBehaviour
 
     // MonoBehaviour is Unity's generic script variable
     // Note: you can only access base variables and functions
-    public MonoBehaviour pControl;
-    public MonoBehaviour eControl;
+    public MonoBehaviour pControl;  // player controller script
+    public MonoBehaviour eControl;  // enemy controller script
 
+    //  Rate in which the agent slows down to a stop when there is no movement input
     protected float decelerationRate = 0.5f;    // Must be between 0 and 1
     protected Rigidbody rb;
 
+    // number of times an agent can possess another agent on death before truely dying
+    // (currently only for player agent, and current only for the last possessable enemy agent
+    // that landed an attack on them)
     private int deathPossessions = 0;
     public int deathPossessionsRef
     {
@@ -47,39 +54,23 @@ public class AgentControl : MonoBehaviour
 
     void Awake()
     {
+        // Set need float variables for each attack for their cooldowns
+        // Note: couldn't be added to the attack struct due to referencing error
         attackCooldowns = new float[attacks.Count];
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();  // get gameobjects rigidbody component
 
+        // Reset all attack cooldowns
         for (int i = 0; i < attackCooldowns.Length; i++)
         {
             attackCooldowns[i] = 0;
         }
     }
 
-    //public void DamageAgent(float amount, GameObject attacker)
-    //{
-    //    health -= amount;
-
-    //    if (health <= 0)
-    //    {
-    //        // condition for the player, reduce the life
-    //        // count and switch player to controls for attacker
-    //        if (gameObject.tag == "Player" && life > 0)
-    //        {
-    //            life -= 1;
-    //            attacker.GetComponent<AgentControl>().SwitchMode(life);
-    //        }
-            
-    //        // Condition for no lives
-    //        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
-    //        GC.GetComponent<GameController>().RemoveAgent(gameObject);
-    //        Destroy(gameObject);
-    //    }
-    //}
-
     // switch controls
     public void SwitchMode(int lifeCount)
     {
+        // 1. Switch to player controls
+        // 2. Switch to enemy controls
         if (eControl.enabled == true)
         {
             eControl.enabled = false;
@@ -126,6 +117,7 @@ public class AgentControl : MonoBehaviour
         gameObject.tag = tagName;
     }
 
+    // Reduces the velocity of the game object to zero over time
     public void DecelerateVelocity()
     {
         rb.velocity = rb.velocity * decelerationRate * Time.deltaTime;

@@ -350,11 +350,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b970c69cf642c5d41a3f52d52a7d7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  possessable: 1
   moveSpeed: 3
   indicator: {fileID: 788705029296381552}
   attacks:
   - attackRate: 1
-    attackRange: 5
+    attackRange: 6
     attack: {fileID: 3057141149477638096, guid: 5736d05522d344e489b71baf6dd33090, type: 3}
     attackSpawn: {fileID: 1356772550365598290}
   attackCooldowns: []

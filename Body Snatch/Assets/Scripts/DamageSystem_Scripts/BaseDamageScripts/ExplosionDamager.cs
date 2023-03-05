@@ -7,6 +7,8 @@ using UnityEngine;
 // (possibly use destory by time, or just deactivate the game object)
 public class ExplosionDamager : Damager
 {
+    // TODO
+    
     public float radius = 3;
     public float force = 5;
 

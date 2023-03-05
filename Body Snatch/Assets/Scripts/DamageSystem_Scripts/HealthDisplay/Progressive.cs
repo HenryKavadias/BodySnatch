@@ -6,8 +6,8 @@ using UnityEngine;
 
 public abstract class Progressive : MonoBehaviour
 {
-    [SerializeField] private float _initial;
-    private float _current;
+    [SerializeField] private float _initial;    // initial value
+    private float _current;                     // current value
 
     public float Current
     {
@@ -18,13 +18,21 @@ public abstract class Progressive : MonoBehaviour
         set
         {
             _current = value;
+            // Used to change the display bar for the value
+            // without needing to rely on an update function.
+            // (Saves on processing space)
             OnChange?.Invoke();
         }
     }
 
+    // Set inital (also is the maximum amount)
     public float Initial => _initial;
 
+    // Return the ratio between current and max (initial)
     public float Ratio => _current / _initial;
+
+    // Used to trigger changes for the visual display (e.g. the health bar,
+    // which changes in accordance to the ratio of its assigned progressive object)
     public Action OnChange;
 
     private void Awake()
@@ -32,6 +40,7 @@ public abstract class Progressive : MonoBehaviour
         _current = _initial;
     }
 
+    // Decrease current value, not below zero
     public void Sub(float amount)
     {
         Current -= amount;
@@ -44,6 +53,7 @@ public abstract class Progressive : MonoBehaviour
         }
     }
 
+    // Increase current value, not above max (initial)
     public void Add(float amount)
     {
         Current += amount;
