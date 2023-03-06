@@ -7,36 +7,39 @@ using UnityEngine.VFX;
 
 public class GameController : MonoBehaviour
 {
-    public bool possessionOnDeath = false;
+    public bool possessionOnDeath = false;  // enable death possessions
 
-    public int possessionLimit = 1;
+    public int deathPossessionLimit = 1;    // Number of death possessions
 
-    public GameObject[] agentTypes;
+    public GameObject[] agentTypes;         // List of agent types
 
-    public GameObject initPlayerAgent;
+    public GameObject initPlayerAgent;      // Agent the player starts as
     
     //public GameObject agentTypeA;
 
-    public GameObject playerSpawn;
+    public GameObject playerSpawn;          // Player spawn location
 
-    public GameObject[] enemySpawns;
+    public GameObject[] enemySpawns;        // Enemy spawn locations
 
-    public int agentCap = 1;
-    public int maxEnemySpawnCount = 1;
-    public float enemySpawnDelay = 5;
+    public int agentCap = 1;                // Agent count limit
+    public int maxEnemySpawnCount = 1;      // Max number of enemy spawns
+    public float enemySpawnDelay = 5;       // Time delay between enemy spawns
 
+    // list of live agents
     private List<GameObject> liveAgents = new List<GameObject>();
 
-    private float enemySpawnTimer = 0;
-    private int enemySpawnsRemaining = 0;
+    private float enemySpawnTimer = 0;      // Remaining timer for spawner
+    private int enemySpawnsRemaining = 0;   // Remaining enemies that can spawn
 
     private Quaternion spawnRot = Quaternion.identity;
 
+    // Add agent to agent list
     public void AddAgent(GameObject agent)
     {
         liveAgents.Add(agent);
     }
 
+    // Remove agent from agent list
     public void RemoveAgent(GameObject agent) 
     { 
         liveAgents.Remove(agent);
@@ -59,7 +62,7 @@ public class GameController : MonoBehaviour
             {
                 if (initPlayer != null && possessionOnDeath)
                 {
-                    initPlayer.GetComponent<AgentControl>().SetAsPlayer(possessionLimit);
+                    initPlayer.GetComponent<AgentControl>().SetAsPlayer(deathPossessionLimit);
                 }
                 else
                 {
@@ -106,7 +109,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per frame. TODO?: figure out a way to do this without update (might not be possible)
     void Update()
     {
         if (enemySpawnsRemaining > 0 && liveAgents.Count < agentCap)

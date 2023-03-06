@@ -7,10 +7,10 @@ using UnityEngine;
 // (possibly use destory by time, or just deactivate the game object)
 public class ExplosionDamager : Damager
 {
-    // TODO
+    // TODO: add a means to apply damage to surrounding damageable objects (maybe make a child script)
     
-    public float radius = 3;
-    public float force = 5;
+    public float radius = 3;    // radius of explosion
+    public float force = 5;     // force multiplier of explosion
 
     private void OnEnable()
     {
@@ -19,8 +19,10 @@ public class ExplosionDamager : Damager
 
     private void Explode()
     {
+        // List of physics collisions
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
+        // for each object, apply force. For each damageable object, apply damage.
         for(int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].TryGetComponent(out Rigidbody rigidbody))
@@ -36,6 +38,7 @@ public class ExplosionDamager : Damager
         }
     }
 
+    // draws the radius of the explosion in the editor
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, radius);

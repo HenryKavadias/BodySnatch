@@ -32,11 +32,13 @@ public class DestroyByTime : MonoBehaviour
         }
     }
 
+    // Calculates the life time of the object (for projectile/range attacks)
     void CalculateLifeTime()
     {
         lifetime = range / speed;
     }
 
+    // Start the destory timer for the object
     void StartLifeTime()
     {
         Destroy(gameObject, lifetime);
@@ -59,6 +61,7 @@ public class DestroyByTime : MonoBehaviour
 
     void Start()
     {
+        // For textures (currently not in use)
         if (gameObject.tag == "TextEffect")
         {
             FindMainCamera();

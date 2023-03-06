@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Interfaces currently not in use
 public interface IDamageable
 {
     void Damage(float amount);

@@ -8,20 +8,22 @@ using UnityEngine.UIElements;
 public class EnemyController : MonoBehaviour
 {
     // AI variables
-    public Material enemyMat;
+    public Material enemyMat;       // Color material for enemy
     public NavMeshAgent navAgent;   // AI navigation agent
 
+    // AI behavour variables
     public float minTargetDistance = 0;
     public float moveTurningSpeed = 120;
     public float lookTurningSpeed = 2;
     public float maxMeleeDetectionRange = 1.1f;
 
+    // View range variables
     public float viewRadius = 3;
     [Range(0, 360)]
     public float angleOfView = 100;
 
-    public LayerMask targetMask;
-    public LayerMask obstructionMask;
+    public LayerMask targetMask;        // Target layer (for targetable objects [should only be the player])
+    public LayerMask obstructionMask;   // Obstruction layer (for objects that block the agents line of site)
 
     // Universial variables
     protected Vector3 spawnPosition;
@@ -33,11 +35,14 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
+        // Set spawn location and layer mask variables
         spawnPosition = transform.position;
 
         targetMask = LayerMask.GetMask("Agent");
         obstructionMask = LayerMask.GetMask("Obstruction"); ;
     }
+
+    // Set enemy agent variables
     void Start()
     {
         agentCtrl = gameObject.GetComponent<AgentControl>();
@@ -154,6 +159,7 @@ public class EnemyController : MonoBehaviour
         AiController();
     }
 
+    // Finds the player (only for one player at the moment, might need to update for field of view and multiple players)
     protected void ChooseTarget()
     {
         GameObject player = GameObject.FindWithTag("Player");

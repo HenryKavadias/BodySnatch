@@ -12,6 +12,7 @@ public class AgentTriggerDamager : Damager
         attacker = atker;
     }
 
+    // Apply damage with reference to the attacking agent
     public override void Damage(Damageable damageable) => damageable.Damage(damage, attacker);
 
     public bool melee = false;
@@ -65,6 +66,7 @@ public class AgentTriggerDamager : Damager
         }
     }
 
+    // Set the position of the melee attack
     public void SetMeleePosition(int atkIndex)
     {
         if (attacker != null && melee)
@@ -82,6 +84,7 @@ public class AgentTriggerDamager : Damager
         }
     }
 
+    // If attack isn't melee, destroy (on contact)
     void CheckForDestory()
     {
         if (!melee)

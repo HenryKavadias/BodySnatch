@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Progressive _health;
-    [SerializeField] private Image _fillImage;
-    [SerializeField] private Gradient _gradient;
+    [SerializeField] private Progressive _health;   // Health object (used to manage health amount)
+    [SerializeField] private Image _fillImage;      // Image for the health bar
+    [SerializeField] private Gradient _gradient;    // Used to determine the Colour of the health bar
 
     private Camera _cam;
     //[SerializeField] private float reduceSpeed = 2;
@@ -20,11 +20,13 @@ public class HealthBar : MonoBehaviour
         //_fillImage.transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
     }
 
-    private void Update()
-    {
-        //_fillImage.transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
-        //_fillImage.fillAmount = Mathf.MoveTowards(_fillImage.fillAmount, _health.Ratio, reduceSpeed * Time.deltaTime);
-    }
+    //private void Update()
+    //{
+    //    //_fillImage.transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
+    //    //_fillImage.fillAmount = Mathf.MoveTowards(_fillImage.fillAmount, _health.Ratio, reduceSpeed * Time.deltaTime);
+    //}
+
+    // The two functions below update the health bar when the health object invokes the "OnChange" action variable
 
     private void OnEnable()
     {
@@ -36,6 +38,7 @@ public class HealthBar : MonoBehaviour
         _health.OnChange -= UpdateBar;
     }
 
+    // Changes the fill amount of the bar and the color based on the health objects' ratio
     private void UpdateBar()
     {
         _fillImage.fillAmount = _health.Ratio;

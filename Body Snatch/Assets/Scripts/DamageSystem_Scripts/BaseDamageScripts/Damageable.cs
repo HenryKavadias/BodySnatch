@@ -14,7 +14,7 @@ public class Damageable : MonoBehaviour
     // Destroy or spawn something depending on the event
     public UnityEvent OnDie;
 
-
+    // Damage object
     public virtual void Damage(
         float damage, GameObject attacker = null)
     {
@@ -32,14 +32,11 @@ public class Damageable : MonoBehaviour
             StartCoroutine(SlowDie());
         }
     }
+
+    // Heal object
     public virtual void Heal(float heal)
     {
         _health.Add(heal);
-
-        //if (_health.Current > _health.Initial)
-        //{
-        //    _health.Current = _health.Initial;
-        //}
     }
 
     protected void Die()
