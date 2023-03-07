@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class BlastWave : MonoBehaviour
 {
-    public int pointsCount = 100;
-    public float maxRadius = 50;
-    public float speed = 5;
-    public float startWidth = 5;
-    public float force = 5;
+    public int pointsCount = 100;   // Number of points drawn for the blast wave radius
+    public float maxRadius = 50;    // Max radius of blast wave
+    public float speed = 5;         // Speed of blast wave
+    public float startWidth = 5;    // Starting width of blast wave
+    public float force = 5;         // Force of blast wave
 
+    // Renderer for blast wave
     private LineRenderer lineRenderer;
 
+    // Get the renderer and set the total number of draw points for it (needs one more than point count)
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -19,11 +21,15 @@ public class BlastWave : MonoBehaviour
         lineRenderer.positionCount = pointsCount + 1;
     }
 
+    // Start Blast Wave
     private void Start()
     {
         StartCoroutine(Blast());
     }
 
+    // TODO: apply damage to damageable objects
+
+    // Apply damage and force to all objects hit by the blast wave
     private void Damage(float currentRadius)
     {
         Collider[] hittingObjects = Physics.OverlapSphere(transform.position, currentRadius);
@@ -38,12 +44,12 @@ public class BlastWave : MonoBehaviour
             }
 
             // Adds force to the objects the blast hits
-
             Vector3 direction = (hittingObjects[i].transform.position - transform.position).normalized;
             rb.AddForce(direction * force, ForceMode.Impulse);
         }
     }
 
+    // Modifies the radius of the blast wave over time
     private IEnumerator Blast()
     {
         float currentRadius = 0f;
@@ -59,6 +65,7 @@ public class BlastWave : MonoBehaviour
         }
     }
 
+    // Draws the visual effect of the blast wave with the line renderer
     private void Draw(float currentRadius)
     {
         float angleBetweenPoints = 360f / pointsCount;

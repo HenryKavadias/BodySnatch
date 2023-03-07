@@ -50,46 +50,8 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(new Vector3(mousePos.x, transform.position.y, mousePos.z));
     }
 
-    //protected virtual void PlayerAttack() { }
-
     protected virtual void Update()
     {
         PlayerControls();
     }
-
-    //void inforceBoundary()
-    //{
-    //    gameObject.GetComponent<Rigidbody>().position = new Vector3
-    //        (Mathf.Clamp(gameObject.GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax),
-    //        0.0f,
-    //        Mathf.Clamp(gameObject.GetComponent<Rigidbody>().position.z, boundary.zMin, boundary.zMax));
-    //}
-    //void playerControls()
-    //{
-    //    gameObject.GetComponent<Rigidbody>().rotation = Quaternion.identity;
-    //    playerMovement();
-    //}
-    //void playerMovement()
-    //{
-    //    float moveHorizontal = Input.GetAxis("Horizontal");
-    //    float moveVertical = Input.GetAxis("Vertical");
-
-    //    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-    //    gameObject.GetComponent<Rigidbody>().velocity = movement * agent.moveSpeed;
-
-    //    gameObject.GetComponent<Rigidbody>().position = new Vector3
-    //        (gameObject.GetComponent<Rigidbody>().position.x,
-    //        0.0f,
-    //        gameObject.GetComponent<Rigidbody>().position.z);
-
-    //    if (enableBoundary)
-    //    {
-    //        inforceBoundary();
-    //    }
-    //}
-
-    //void Update()
-    //{
-    //    playerControls();
-    //}
 }
