@@ -1151,13 +1151,13 @@ MonoBehaviour:
   possessionOnDeath: 1
   deathPossessionLimit: 1
   agentTypes:
-  - {fileID: 4123372960431753568, guid: a4400bfe6448de543a5c6bf2d7dca78f, type: 3}
+  - {fileID: 4123372960431753568, guid: a45d3819b65bbe94294ebd7ddabb1bdb, type: 3}
   initPlayerAgent: {fileID: 4123372960431753568, guid: e67047cf9942ffb42ad746e5d6c7f3da, type: 3}
   playerSpawn: {fileID: 13994549}
   enemySpawns:
   - {fileID: 2123077683}
   - {fileID: 574168459}
-  agentCap: 2
+  agentCap: 1
   maxEnemySpawnCount: 6
   enemySpawnDelay: 3
 --- !u!1 &2123077683
